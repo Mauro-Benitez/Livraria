@@ -9,7 +9,11 @@ namespace Core.Entidades
 {
     public class Autor : BaseEntity
     {
+        public required string Nome {  get; set; }
 
-        List<Livro> livros;
+        public DateTime DataNascimento { get; set; }
+
+        //relacionamento Um para Muitos (Autor -> livro)
+        ICollection<Livro> livros;
     }
 }

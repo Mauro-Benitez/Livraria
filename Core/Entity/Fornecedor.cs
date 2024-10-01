@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Base
+namespace Core.Entity
 {
-    public class BaseEntity
+    internal class Fornecedor
     {
-
-        public int Id { get; set; }
-
-    
     }
 }
