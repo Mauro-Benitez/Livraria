@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entidades
+namespace Core.Entity
 {
     public class Autor : BaseEntity
     {
@@ -14,6 +14,6 @@ namespace Core.Entidades
         public DateTime DataNascimento { get; set; }
 
         //relacionamento Um para Muitos (Autor -> livro)
-        ICollection<Livro> livros;
+        public ICollection<Livro> livros;
     }
 }

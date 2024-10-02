@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entidades
+namespace Core.Entity
 {
     public class Cliente : BaseEntity
     {
          public required string Nome { get; set; }
 
-         public string Endreco {  get; set; }
+         public string Endereco {  get; set; }
 
         public ICollection<Avaliacao> Avaliacoes { get; set; }
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entidades
+namespace Core.Entity
 {
    public class Avaliacao : BaseEntity
     {
