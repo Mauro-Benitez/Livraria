@@ -15,15 +15,19 @@ namespace Core.Entity
 
         //relacionamento Um para Muitos (Livro -> Autor)
         public Autor Autor { get; set; }
+
+        //Chave estrangeira para autor
         public int IdAutor { get; set; }
 
-        //relacionamento Muitos para Muitos (Livro -> Genero)
-        ICollection<LivroGenero> LivroGeneros { get; set; }
-
-
+       
         //relacionamento Muitos para Um (Avaliação -> Livro)
         public ICollection<Avaliacao> Avaliacoes { get; set; }
 
-               
+
+        //relacionamento Muitos para Um (Livro -> Pedidos)
+        public ICollection<Pedido> Pedidos { get; set; }
+
+        //relacionamento um para um (livro -> estoque)
+        public LivroEstoque LivroEstoque { get; set; }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Infraestructure
+namespace Infraestructure.Repository
 {
-    public class DbReadContext : DbContext 
+    public class DbReadContext : DbContext
     {
 
 

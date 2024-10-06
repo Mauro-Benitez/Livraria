@@ -15,5 +15,7 @@ namespace Core.Entity
 
         public ICollection<Avaliacao> Avaliacoes { get; set; }
 
+        public ICollection<Pedido> Pedidos { get; set; }
+
     }
 }

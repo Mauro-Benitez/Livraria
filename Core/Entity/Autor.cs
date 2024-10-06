@@ -14,6 +14,6 @@ namespace Core.Entity
         public DateTime DataNascimento { get; set; }
 
         //relacionamento Um para Muitos (Autor -> livro)
-        public ICollection<Livro> livros;
+        public ICollection<Livro> Livros;
     }
 }

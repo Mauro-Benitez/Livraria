@@ -1,4 +1,4 @@
-using Infraestructure;
+using Infraestructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
