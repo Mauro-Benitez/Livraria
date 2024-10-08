@@ -9,7 +9,7 @@ namespace Core.Entity
 {
     public class Cliente : BaseEntity
     {
-         public required string Nome { get; set; }
+         public string Nome { get; set; }
 
          public string Endereco {  get; set; }
 

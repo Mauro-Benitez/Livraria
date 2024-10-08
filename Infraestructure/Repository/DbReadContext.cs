@@ -4,13 +4,16 @@ namespace Infraestructure.Repository
 {
     public class DbReadContext : DbContext
     {
+        public DbReadContext(DbContextOptions<DbReadContext> options) : base(options)
+        {
+            
+        }
 
 
-
-        //context
-
-
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
 
 
     }

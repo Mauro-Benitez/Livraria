@@ -15,16 +15,16 @@ builder.Services.AddSwaggerGen();
 
 
 //db
-var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+var configuration = builder.Configuration;
 
 //Read
-var stringConection = configuration.GetValue<string>("ConnectionStringsDbRead");
-builder.Services.AddDbContext<DbReadContext>(options => options.UseSqlServer(stringConection));
+//var stringConection = configuration.GetValue<string>("ConnectionStringsDbRead");
+//builder.Services.AddDbContext<DbReadContext>(options => options.UseSqlServer(stringConection));
 
 
 //Edit
 var stringConectionEdit = configuration.GetValue<string>("ConnectionStringsDbEdit");
-builder.Services.AddDbContext<DbReadContext>(options => options.UseSqlServer(stringConection));
+builder.Services.AddDbContext<DbReadContext>(options => options.UseSqlServer(stringConectionEdit));
 
 
 

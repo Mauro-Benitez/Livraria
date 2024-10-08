@@ -9,7 +9,7 @@ namespace Core.Entity
 {
     public class Livro : BaseEntity
     {
-        public required string Titulo { get; set; }
+        public string Titulo { get; set; }
 
         public decimal Preco { get; set; }
 

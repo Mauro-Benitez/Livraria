@@ -13,15 +13,15 @@ namespace Infraestructure.Repository.Mapping
     {
         public void Configure(EntityTypeBuilder<Pedido> builder)
         {
-            builder.ToTable("Livros");
+            //builder.ToTable("Livros");
 
-            // Chave primária
-            builder.HasKey(p => p.Id);
+            //// Chave primária
+            //builder.HasKey(p => p.Id);
 
-            // Mapeamento de propriedades
-            builder.Property(p => p.Id)
-                   .HasColumnType("INT")
-                   .UseIdentityColumn();
+            //// Mapeamento de propriedades
+            //builder.Property(p => p.Id)
+            //       .HasColumnType("INT")
+            //       .UseIdentityColumn();
 
         
             // Relacionamento um para muitos (Livro => Autor)

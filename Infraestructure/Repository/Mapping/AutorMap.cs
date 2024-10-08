@@ -8,19 +8,19 @@ namespace Infraestructure.Repository.Mapping
     {
         public void Configure(EntityTypeBuilder<Autor> builder)
         {
-            // Nome da tabela
-            builder.ToTable("Avaliacao");
+            //// Nome da tabela
+            //builder.ToTable("Avaliacao");
 
-            // Chave primária
-            builder.HasKey(p => p.Id);
+            //// Chave primária
+            //builder.HasKey(p => p.Id);
 
-            // Mapeamento de propriedades
-            builder.Property(p => p.Id)
-                .HasColumnType("INT")
-                .UseIdentityColumn();
+            //// Mapeamento de propriedades
+            //builder.Property(p => p.Id)
+            //    .HasColumnType("INT")
+            //    .UseIdentityColumn();
 
-            builder.Property(p => p.DataNascimento)
-                .HasColumnType("DATETIME");
+            //builder.Property(p => p.DataNascimento)
+            //    .HasColumnType("DATETIME");
 
 
         }

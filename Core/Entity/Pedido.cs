@@ -12,11 +12,11 @@ namespace Core.Entity
 
 
         public int IdCliente { get; set; }
-        public Cliente Cliente { get; set; }
+        public Cliente Cliente { get; set; } = new Cliente();
 
 
-        public int IdLivro { get; set; }
-        public Livro Livro { get; set; }
+        public int IdLivro { get; set; } 
+        public Livro Livro { get; set; } = new Livro();
 
 
 

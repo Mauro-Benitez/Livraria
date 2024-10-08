@@ -6,12 +6,9 @@ namespace Core.Entity
 {
     public class LivroEstoque : BaseEntity
     {
-        //relacionamento Um para Um (Livro -> LivroEstoque)
-        public Livro Livro { get; set; }
-
+        // Chave estrangeira para Livro
         public int IdLivro { get; set; }
+        public Livro Livro { get; set; } = new Livro();
         public int Quantidade { get; set; }
-
-
     }
 }
