@@ -1,17 +1,15 @@
-﻿using Livraria.Infraestructure.Context;
+﻿using Livraria.Core.Repository;
+using Livraria.Infraestructure.Context;
+using Livraria.Infraestructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Livraria.Infraestructure
 {
     public static class InfraestructureModule
     {
+        
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services
@@ -31,7 +29,7 @@ namespace Livraria.Infraestructure
 
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
             return services;
         }
     }

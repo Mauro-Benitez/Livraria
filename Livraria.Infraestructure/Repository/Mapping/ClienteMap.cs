@@ -23,6 +23,7 @@ namespace Livraria.Infraestructure.Repository.Mapping
             builder.Property(p => p.Id).HasColumnType("INT").UseIdentityColumn();
             builder.Property(p => p.Nome).HasColumnType("VARCHAR(500)").IsRequired();
             builder.Property(p => p.Endereco).HasColumnType("VARCHAR(500)").IsRequired();
+            builder.Property(p => p.CPF).HasColumnType("VARCHAR(11)").IsRequired();
 
         }
     }

@@ -5,7 +5,7 @@ namespace Livraria.Core.Entity
 {
     public class Avaliacao : BaseEntity
     {
-        public int Nota { get; set; }
+        public required int Nota { get; set; }
         public string Comentario { get; set; }
         public DateTime DataAvalicao { get; set; }
 

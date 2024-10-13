@@ -8,13 +8,13 @@ namespace Livraria.Core.Entity
 
         public required string Titulo { get; set; }
 
-        public decimal Preco { get; set; }
+        public required decimal Preco { get; set; }
 
         //relacionamento Um para Muitos (Livro -> Autor)
-        public Autor Autor { get; set; }
+        public  Autor Autor { get; set; }
 
         //Chave estrangeira para autor
-        public int IdAutor { get; set; }
+        public  int IdAutor { get; set; }
 
 
         //relacionamento Muitos para Um (Avaliação -> Livro)
