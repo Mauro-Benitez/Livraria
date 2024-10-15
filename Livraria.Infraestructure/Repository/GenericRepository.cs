@@ -23,9 +23,17 @@ namespace Livraria.Infraestructure.Repository
 
         public T Create(T item)
         {
-            item.DataCriacao = DateTime.Now;
-            _dbSet.Add(item);
-            _context.SaveChanges();
+            try
+            {
+                item.DataCriacao = null;               
+                _dbSet.Add(item);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+           
             return item;
         }
 

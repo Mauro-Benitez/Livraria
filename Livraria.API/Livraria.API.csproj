@@ -15,10 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Livraria.Application\Livraria.Application.csproj" />
     <ProjectReference Include="..\Livraria.Infraestructure\Livraria.Infraestructure.csproj" />
   </ItemGroup>
 

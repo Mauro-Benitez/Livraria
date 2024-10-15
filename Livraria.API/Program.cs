@@ -1,3 +1,4 @@
+using Livraria.Application;
 using Livraria.Infraestructure;
 using Livraria.Infraestructure.Context;
 using Microsoft.AspNetCore.Components.Forms;
@@ -17,7 +18,9 @@ builder.Services.AddSwaggerGen();
 
 // Add services to the container.
 builder.Services
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructure(builder.Configuration)
+    .AddApplication();
+ 
 
 var app = builder.Build();
 

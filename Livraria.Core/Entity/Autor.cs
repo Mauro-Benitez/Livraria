@@ -7,7 +7,7 @@ namespace Livraria.Core.Entity
     {
         public required string Nome { get; set; }
 
-        public DateTime DataNascimento { get; set; }
+        public DateTime? DataNascimento { get; set; }
 
         //relacionamento Um para Muitos (Autor -> livro)
         public ICollection<Livro> Livros;

@@ -24,12 +24,14 @@ namespace Livraria.Infraestructure
 
             services.AddDbContext<DbEditContext>(options => options.UseSqlServer(connectionString));
 
+
             return services;
         }
 
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<ILivroRepository, LivroRepository>();
             return services;
         }
     }
