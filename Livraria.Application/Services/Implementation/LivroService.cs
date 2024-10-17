@@ -52,6 +52,7 @@ namespace Livraria.Application.Services.Implementation
             {
                 Titulo = item.Titulo,
                 Preco = item.Preco,
+                IdAutor = autor.Id,
                 AutorLivro = autor,
             };           
             var livroCriado = _livroRepository.Create(livro);
@@ -90,14 +91,17 @@ namespace Livraria.Application.Services.Implementation
 
         public LivroDto FindById(long IdItem)
         {
-            bool existe = _context.Livros.Any(l => l.Id == IdItem);
-            if(existe)
+            var entidade = _livroRepository.FindById(IdItem);
+           
+            if (entidade == null)
             {
-                try
-                {
-                    var entidade = _livroRepository.FindById(IdItem);
-                    var autor = _autorRepository.FindById(entidade.IdAutor);
+                 throw new Exception("Este livro não existe");
 
+            }
+
+            var autor = _autorRepository.FindById(entidade.IdAutor);
+           
+                   
                     var entidadeDto = new LivroDto
                     {
                         Id = entidade.Id,
@@ -107,33 +111,25 @@ namespace Livraria.Application.Services.Implementation
                         DataCriacao = entidade.DataCriacao
                     };
 
-                    return entidadeDto;
-                }
-
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-            }
-            else return null;
-           
-            
+                    return entidadeDto;       
+             
         }   
 
         public LivroDto Update(LivroDto item)
         {
 
-            bool existe = _context.Livros.Any(l => l.Id == item.Id);
-            if (existe)
+            var entidade = _livroRepository.FindById((long)item.Id);
+            if (entidade == null)
             {
-                try
-                {
-
-                    var entidade = _livroRepository.FindById((long)item.Id);
+                throw new Exception("Este livro não existe");
+            }
+                   
                     var autor = _autorRepository.FindById(entidade.IdAutor);
+
                     entidade.Titulo = item.Titulo;
                     entidade.AutorLivro.Nome = item.AutorLivro;
                     entidade.DataCriacao = item.DataCriacao;
+                    entidade.IdAutor = autor.Id;
                     entidade.Preco = item.Preco;
                     _livroRepository.Update(entidade);
 
@@ -145,17 +141,8 @@ namespace Livraria.Application.Services.Implementation
                         Preco = entidade.Preco,
                         DataCriacao = entidade.DataCriacao
                     };
-                    return entidadeDto;
-                }
 
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-            }
-            else return null;
-            
-           
+                    return entidadeDto;              
         }
     }
     
