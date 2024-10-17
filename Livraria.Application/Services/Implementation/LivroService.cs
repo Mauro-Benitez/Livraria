@@ -2,8 +2,10 @@
 using Livraria.Core.Entity;
 using Livraria.Core.Repository;
 using Livraria.Infraestructure.Context;
+using Microsoft.EntityFrameworkCore.Storage.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +27,7 @@ namespace Livraria.Application.Services.Implementation
 
         public LivroDto Create(LivroDto item)
         {
-            var autorExistente = _context.Autores.FirstOrDefault(a => a.Nome == item.Autor);
+            var autorExistente = _context.Autores.FirstOrDefault(a => a.Nome == item.AutorLivro);
 
             Autor autor;
 
@@ -33,7 +35,7 @@ namespace Livraria.Application.Services.Implementation
             {
                 autor = new Autor
                 {
-                    Nome = item.Autor,
+                    Nome = item.AutorLivro,
                     DataNascimento = null
 
                 };
@@ -50,34 +52,110 @@ namespace Livraria.Application.Services.Implementation
             {
                 Titulo = item.Titulo,
                 Preco = item.Preco,
-                Autor = autor,
-            };
+                AutorLivro = autor,
+            };           
+            var livroCriado = _livroRepository.Create(livro);
 
-            item.DataCriacao = livro.DataCriacao;
-
-            _livroRepository.Create(livro);
+            item.DataCriacao = livroCriado.DataCriacao;
+            item.Id = livroCriado.Id;
 
             return item;
         }
 
         public void Delete(long IdItem)
-        {
-            throw new NotImplementedException();
+        {           
+           _livroRepository.Delete(IdItem);                 
         }
 
         public List<LivroDto> FindAll()
         {
-            throw new NotImplementedException();
+            var result = _livroRepository.FindAll();
+
+            List<LivroDto> livros = new List<LivroDto>();
+
+            foreach(var item in result)
+            {
+                var autor = _autorRepository.FindById(item.IdAutor);
+
+                livros.Add(new LivroDto
+                {   Id = item.Id,
+                    AutorLivro = autor.Nome,
+                    Preco = item.Preco,
+                    Titulo = item.Titulo
+                });
+            }
+
+            return livros.ToList();
         }
 
         public LivroDto FindById(long IdItem)
         {
-            throw new NotImplementedException();
-        }
+            bool existe = _context.Livros.Any(l => l.Id == IdItem);
+            if(existe)
+            {
+                try
+                {
+                    var entidade = _livroRepository.FindById(IdItem);
+                    var autor = _autorRepository.FindById(entidade.IdAutor);
+
+                    var entidadeDto = new LivroDto
+                    {
+                        Id = entidade.Id,
+                        Titulo = entidade.Titulo,
+                        AutorLivro = autor.Nome,
+                        Preco = entidade.Preco,
+                        DataCriacao = entidade.DataCriacao
+                    };
+
+                    return entidadeDto;
+                }
+
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            else return null;
+           
+            
+        }   
 
         public LivroDto Update(LivroDto item)
         {
-            throw new NotImplementedException();
+
+            bool existe = _context.Livros.Any(l => l.Id == item.Id);
+            if (existe)
+            {
+                try
+                {
+
+                    var entidade = _livroRepository.FindById((long)item.Id);
+                    var autor = _autorRepository.FindById(entidade.IdAutor);
+                    entidade.Titulo = item.Titulo;
+                    entidade.AutorLivro.Nome = item.AutorLivro;
+                    entidade.DataCriacao = item.DataCriacao;
+                    entidade.Preco = item.Preco;
+                    _livroRepository.Update(entidade);
+
+                    var entidadeDto = new LivroDto
+                    {
+                        Id = entidade.Id,
+                        Titulo = entidade.Titulo,
+                        AutorLivro = autor.Nome,
+                        Preco = entidade.Preco,
+                        DataCriacao = entidade.DataCriacao
+                    };
+                    return entidadeDto;
+                }
+
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            else return null;
+            
+           
         }
     }
     

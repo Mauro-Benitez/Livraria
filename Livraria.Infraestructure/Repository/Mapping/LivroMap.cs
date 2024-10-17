@@ -30,7 +30,7 @@ namespace Livraria.Infraestructure.Repository.Mapping
       
 
             // Relacionamento um para muitos (Livro => Autor)
-            builder.HasOne(p => p.Autor)
+            builder.HasOne(p => p.AutorLivro)
                 .WithMany(a => a.Livros)
                 .HasForeignKey(p => p.IdAutor);
 

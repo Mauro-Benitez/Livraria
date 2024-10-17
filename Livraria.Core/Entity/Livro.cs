@@ -11,7 +11,7 @@ namespace Livraria.Core.Entity
         public required decimal Preco { get; set; }
 
         //relacionamento Um para Muitos (Livro -> Autor)
-        public  Autor Autor { get; set; }
+        public  Autor AutorLivro { get; set; }
 
         //Chave estrangeira para autor
         public  int IdAutor { get; set; }
@@ -26,5 +26,10 @@ namespace Livraria.Core.Entity
 
         //relacionamento um para um (livro -> estoque)
         public LivroEstoque LivroEstoque { get; set; }
+
+
+      
+
+        
     }
 }

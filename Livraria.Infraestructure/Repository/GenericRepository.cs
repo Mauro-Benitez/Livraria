@@ -50,11 +50,12 @@ namespace Livraria.Infraestructure.Repository
 
         public T FindById(long IdItem)
         {
-            return _dbSet.FirstOrDefault(e => e.Id.Equals(IdItem));
+            return _dbSet.FirstOrDefault(e => e.Id == IdItem);
         }
 
         public T Update(T item)
         {
+            _context.Set<T>().Any(e => e.Id == item.Id);
             _dbSet.Update(item);
             _context.SaveChanges();
 
