@@ -92,13 +92,9 @@ namespace Livraria.Application.Services.Implementation
         public LivroDto FindById(long IdItem)
         {
             var entidade = _livroRepository.FindById(IdItem);
-           
-            if (entidade == null)
-            {
-                 throw new Exception("Este livro não existe");
 
-            }
-
+            if (entidade == null) return null;
+          
             var autor = _autorRepository.FindById(entidade.IdAutor);
            
                    
@@ -119,10 +115,8 @@ namespace Livraria.Application.Services.Implementation
         {
 
             var entidade = _livroRepository.FindById((long)item.Id);
-            if (entidade == null)
-            {
-                throw new Exception("Este livro não existe");
-            }
+            if (entidade == null) return null;
+           
                    
                     var autor = _autorRepository.FindById(entidade.IdAutor);
 

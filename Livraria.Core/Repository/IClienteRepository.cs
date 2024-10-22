@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Livraria.Core.Repository
 {
-    public interface ILivroRepository : IRepository<Livro> 
-    {     
+    public interface IClienteRepository : IRepository<Cliente>
+    {
+        Cliente ObterPedidosDoCliente(int id);
 
     }
 }

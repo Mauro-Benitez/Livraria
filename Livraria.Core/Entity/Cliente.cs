@@ -11,6 +11,10 @@ namespace Livraria.Core.Entity
 
         public required string CPF { get; set; }
 
+        public Cliente()
+        {
+        }
+
 
 
         //relacionamento Muitos para Um (Avaliação -> Cliente)

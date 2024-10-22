@@ -32,6 +32,7 @@ namespace Livraria.Infraestructure
         {
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
             services.AddScoped<ILivroRepository, LivroRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
             return services;
         }
     }

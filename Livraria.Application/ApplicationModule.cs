@@ -16,6 +16,9 @@ namespace Livraria.Application
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<ILivroService, LivroService>();
+            services.AddScoped<IPedidoService, PedidoService>();
+            services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IAutorService, AutorService>();
 
             return services;
         }

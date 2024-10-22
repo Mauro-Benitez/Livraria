@@ -12,11 +12,11 @@ namespace Livraria.API.Controllers
     public class LivroController : Controller
     {
 
-        private readonly ILivroService _repository;
+        private readonly ILivroService _livroService;
 
         public LivroController(ILivroService repository)
         {
-            _repository = repository;
+            _livroService = repository;
         }
 
 
@@ -26,7 +26,7 @@ namespace Livraria.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAll()
         {
-            return Ok(_repository.FindAll());
+            return Ok(_livroService.FindAll());
         }
 
 
@@ -35,16 +35,10 @@ namespace Livraria.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetById([FromRoute] int id)
         {
-            if(_repository.FindById(id) != null)
-            {
-                return Ok(_repository.FindById(id));
-            }
-
-            else
-            {
-                return NotFound("Id não existe");
-            }
+            if(_livroService.FindById(id) == null) return NotFound("Livro não existe");
             
+            return Ok(_livroService.FindById(id));          
+      
         }
 
 
@@ -57,7 +51,7 @@ namespace Livraria.API.Controllers
             livro.DataCriacao = null;
             try
             {
-                var novoLivro = _repository.Create(livro);
+                var novoLivro = _livroService.Create(livro);
                 return Ok(novoLivro);
             }
             catch(Exception ex)
@@ -74,24 +68,11 @@ namespace Livraria.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Update([FromBody] LivroDto livro)
         {
-            if(_repository.Update(livro) != null)
-            {
-                try
-                {
-                    _repository.Update(livro);
-                    return Ok(livro);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-            }
-            else
-            {
-                return BadRequest("Este livro ainda não está cadastrado");
-            }
+            if(_livroService.Update(livro) == null) return BadRequest("Este livro ainda não está cadastrado");  
             
-            
+            _livroService.Update(livro);
+             return Ok(livro);                
+         
         }
 
         [HttpDelete("{id:int}")]
@@ -99,25 +80,11 @@ namespace Livraria.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public  IActionResult Delete([FromRoute] int id)
         {
-            if(_repository.FindById(id) != null)
-            {
-                try
-                {
-                    _repository.Delete(id);
-                    return Ok();
-                }
-                catch (Exception e)
-                {
-                    return BadRequest(e.Message);
-                }
-            }
+            if(_livroService.FindById(id) == null) return NotFound("Livro não existe");                                                    
 
-            else
-            {
-                return NotFound("Id não existe");
-            }
-          
-            
+            _livroService.Delete(id);
+            return Ok();
+
         }
 
     }
