@@ -12,14 +12,14 @@ namespace Livraria.Infraestructure.Repository
 {
     class ClienteRepository : GenericRepository<Cliente>, IClienteRepository
     {
-        public ClienteRepository(DbEditContext context) : base(context)
+        public ClienteRepository(DbEditContext context, DbReadContext readContext) : base(context, readContext)
         {
         }
 
         public Cliente ObterPedidosDoCliente(int id)
         {
 
-            var cliente = _context.Clientes
+            var cliente = _readContext.Clientes
                 .Include(c => c.Pedidos)
                     .ThenInclude(p => p.Livro)
                     .ThenInclude(l => l.AutorLivro)

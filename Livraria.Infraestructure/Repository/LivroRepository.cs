@@ -6,7 +6,7 @@ namespace Livraria.Infraestructure.Repository
 {
     public class LivroRepository: GenericRepository<Livro>, ILivroRepository
     {
-        public LivroRepository(DbEditContext context) : base(context)
+        public LivroRepository(DbEditContext context, DbReadContext dbReadContext) : base(context, dbReadContext)
         {
         }
 

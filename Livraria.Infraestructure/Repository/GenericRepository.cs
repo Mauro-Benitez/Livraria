@@ -13,12 +13,14 @@ namespace Livraria.Infraestructure.Repository
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
         protected DbEditContext _context;
+        protected DbReadContext _readContext;
         protected DbSet<T> _dbSet;
 
-        public GenericRepository(DbEditContext context)
+        public GenericRepository(DbEditContext context, DbReadContext readContext)
         {
             _context = context;
             _dbSet = context.Set<T>();
+            _readContext = readContext; 
         }
 
         public T Create(T item)
@@ -45,12 +47,12 @@ namespace Livraria.Infraestructure.Repository
 
         public List<T> FindAll()
         {
-            return _dbSet.ToList();
+            return _readContext.Set<T>().ToList();  
         }
 
         public T FindById(long IdItem)
         {
-            return _dbSet.FirstOrDefault(e => e.Id == IdItem);
+            return _readContext.Set<T>().FirstOrDefault(e => e.Id == IdItem);
         }
 
         public T Update(T item)

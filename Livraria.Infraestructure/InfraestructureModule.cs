@@ -22,7 +22,11 @@ namespace Livraria.Infraestructure
         {
             var connectionString = configuration.GetConnectionString("DbEdit");
 
+            var connectionStringDbRead = configuration.GetConnectionString("DbRead");
+
             services.AddDbContext<DbEditContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddDbContext<DbReadContext>(options => options.UseSqlServer(connectionStringDbRead));
 
 
             return services;
